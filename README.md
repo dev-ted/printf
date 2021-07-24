@@ -37,7 +37,7 @@ Compile your code with `gcc -Wall -Werror -Wextra -pedantic *.c`
 
 ```c
 #include <stdio.h>
-#include "printf.h"
+#include "holberton.h"
 
 int main(void)
 {
