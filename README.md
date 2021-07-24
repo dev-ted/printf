@@ -25,7 +25,7 @@ git clone https://github.com/dev-ted/printf.git
 To add the man_3_prinf page to your mandb run this script
 
 ```bash
-sudo ./install.sh
+sudo ./install
 ```
 
 # Usage
