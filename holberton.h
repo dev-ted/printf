@@ -26,8 +26,7 @@ int print_chars(va_list);
 int print_strings(va_list);
 int print_percentage(va_list);
 int print_integer(va_list);
-
-
+int print_binary(va_list list);
 
 /* Utils */
 int print_num(va_list);
