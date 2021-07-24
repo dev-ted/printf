@@ -12,7 +12,7 @@ int main(void)
 	char *name;
 
 	name = "  is fun";
-	print = _printf("%c%s\n", 'c', name);
+	print = _printf("%c%s%i%d\n", 'c', name, 3, 7);
 	printf("%d\n", print);
 	return (0);
 }
