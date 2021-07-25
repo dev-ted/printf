@@ -39,6 +39,13 @@ int print_binary(va_list list)
 	return (length);
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+int print_heX(va_list list)
+=======
+<<<<<<< HEAD
+>>>>>>> print_heX
 /**
  * hexa_length - return the lenght of a number converted in hexa
  * @n: the number
@@ -164,6 +171,7 @@ int octal_length(unsigned int n)
  */
 
 int print_octal(va_list list)
+<<<<<<< HEAD
 {
 	int i = 0, length = 0, res = 0, j = 0;
 	unsigned int n = 0;
@@ -193,3 +201,107 @@ int print_octal(va_list list)
 }
 
 
+=======
+>>>>>>> Stashed changes
+{
+    /*unsigned int hex_num = va_arg(list, unsigned int);
+    char *heX_string = convert_func(hex_num, 16, 10);
+    int count = 0;
+    if (heX_string[0] != '0')
+        count += _putchar("0X");
+    count += _putchar(heX_string[0]);
+    return count;*/
+
+    unsigned int num;
+    int len;
+    int rem_num;
+    char *hex_rep;
+    char *rev_hex;
+
+    num = va_arg(list, unsigned int);
+
+    if (num == 0)
+        return (_putchar('0'));
+    if (num < 1)
+        return (-1);
+    len = get_base_len(num, 16);
+    hex_rep = malloc(sizeof(char) * len + 1);
+    if (hex_rep == NULL)
+        return (-1);
+    for (len = 0; num > 0; len++)
+    {
+        rem_num = num % 16;
+        if (rem_num > 9)
+        {
+            rem_num = hex_check(rem_num, 'X');
+            hex_rep[len] = rem_num;
+        }
+        else
+            hex_rep[len] = rem_num + 48;
+        num = num / 16;
+    }
+    hex_rep[len] = '\0';
+    rev_hex = reverse_string(hex_rep);
+    if (rev_hex == NULL)
+        return (-1);
+    get_write_base(rev_hex);
+    free(hex_rep);
+    free(rev_hex);
+    return (len);
+}
+
+<<<<<<< Updated upstream
+=======
+
+=======
+int print_heX(va_list list)
+{
+    /*unsigned int hex_num = va_arg(list, unsigned int);
+    char *heX_string = convert_func(hex_num, 16, 10);
+    int count = 0;
+    if (heX_string[0] != '0')
+        count += _putchar("0X");
+    count += _putchar(heX_string[0]);
+    return count;*/
+
+    unsigned int num;
+    int len;
+    int rem_num;
+    char *hex_rep;
+    char *rev_hex;
+
+    num = va_arg(list, unsigned int);
+
+    if (num == 0)
+        return (_putchar('0'));
+    if (num < 1)
+        return (-1);
+    len = get_base_len(num, 16);
+    hex_rep = malloc(sizeof(char) * len + 1);
+    if (hex_rep == NULL)
+        return (-1);
+    for (len = 0; num > 0; len++)
+    {
+        rem_num = num % 16;
+        if (rem_num > 9)
+        {
+            rem_num = hex_check(rem_num, 'X');
+            hex_rep[len] = rem_num;
+        }
+        else
+            hex_rep[len] = rem_num + 48;
+        num = num / 16;
+    }
+    hex_rep[len] = '\0';
+    rev_hex = reverse_string(hex_rep);
+    if (rev_hex == NULL)
+        return (-1);
+    get_write_base(rev_hex);
+    free(hex_rep);
+    free(rev_hex);
+    return (len);
+}
+
+>>>>>>> print_heX
+>>>>>>> Stashed changes
+>>>>>>> print_heX
