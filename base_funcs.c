@@ -134,6 +134,28 @@ int print_hexa(va_list list)
 	free(string);
 	return (length);
 }
+/**
+ * octal_length - return the length of a number convert to octal
+ * @n: the number
+ * Return: the length
+ */
+
+int octal_length(unsigned int n)
+{
+	int count = 0;
+
+	while (n > 0)
+	{
+		if (n <= 8)
+		{
+			count++;
+			break;
+		}
+		n /= 8;
+		count++;
+	}
+	return (count);
+}
 
 /**
  * print_octal - print a number converted in octal
@@ -141,13 +163,13 @@ int print_hexa(va_list list)
  * Return: the length of printed in console
  */
 
-int print_octal(va_list args)
+int print_octal(va_list list)
 {
 	int i = 0, length = 0, res = 0, j = 0;
 	unsigned int n = 0;
 	char *string;
 
-	n = va_arg(args, unsigned int);
+	n = va_arg(list, unsigned int);
 	length = octal_length(n);
 	string = malloc(length * sizeof(char) + 1);
 	i = length - 1;

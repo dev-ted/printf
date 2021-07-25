@@ -25,7 +25,7 @@ int main(void)
 	_printf("Binary number: %b\n", 1);
 	/* printf("%u\n", ui);*/
 	_printf("Unassigned num: %u\n", ui);
-	_printf("Octal number:%o", 32);
+	_printf("Octal number:%o\n", 32);
 	_printf("Hexa number:%x", 10);
 
 	return (0);
