@@ -17,7 +17,7 @@ int _printf(const char *format, ...)
 		{"b", print_binary},
 		{"u", print_unsigned_integer},
 		{"x", print_hexa},
-		{"o", print_octal}
+		{"o", print_octal},
 		{"X", print_heX},
 
 	};
