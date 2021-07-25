@@ -16,7 +16,8 @@ int _printf(const char *format, ...)
 		{"i", print_integer},
 		{"b", print_binary},
 		{"u", print_unsigned_integer},
-
+		{"x", print_hexa},
+		{"o", print_octal}
 
 	};
 	va_list args;
