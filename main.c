@@ -26,6 +26,7 @@ int main(void)
 	_printf("Binary number: %b\n", 1);
 	printf("%u\n", ui);
 	_printf("Unassigned num: %u\n", ui);
+	_printf("Unsigned hexadecimal: %X\n", ui);
 
 	return (0);
 }

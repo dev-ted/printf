@@ -28,13 +28,15 @@ int print_percentage(va_list);
 int print_integer(va_list);
 int print_binary(va_list list);
 int print_unsigned_integer(va_list list);
+int print_heX(va_list list);
 
 /* Utils */
+int hex_check(int num, char x);
 int print_num(va_list);
 unsigned int get_base_len(unsigned int num, unsigned int base);
 void get_write_base(char *str);
 char *reverse_string(char *s);
 char *_memcpy(char *dest, char *src, unsigned int n);
 int unsigned_number(unsigned int n);
-
+char *convert_func(unsigned long int num, int base, int lowercase);
 #endif

@@ -46,3 +46,54 @@ void get_write_base(char *str)
 	for (i = 0; str[i] != '\0'; i++)
 		_putchar(str[i]);
 }
+
+/**
+ * convert_func - converts number and base into string
+ * @num: input number
+ * @base: input base
+ * @lowercase: flag if hexa values need to be lowercase
+ * Return: result string
+ */
+
+char *convert_func(unsigned long int num, int base, int lowercase)
+{
+	char *array;
+	char buffer[50];
+	char *str_lowercase;
+	char *str_uppercase;
+	char *ptr;
+
+	str_lowercase = "0123456789abcdef";
+	str_uppercase = "0123456789ABCDEF";
+
+	array = (lowercase)
+				? str_lowercase
+				: str_uppercase;
+	ptr = &buffer[49];
+	*ptr = '\0';
+	do
+	{
+		*--ptr = array[num % base];
+		num /= base;
+} while (num != 0);
+return (ptr);
+}
+
+/**
+ * hex_check - Checks which hex function is calling it
+ * @num: Number to convert into letter
+ * @x: Tells which hex function is calling it
+ * Return: Ascii value for a letter
+ */
+int hex_check(int num, char x)
+{
+	char *hex = "abcdef";
+	char *Hex = "ABCDEF";
+
+	num = num - 10;
+	if (x == 'x')
+		return (hex[num]);
+	else
+		return (Hex[num]);
+	return (0);
+}
