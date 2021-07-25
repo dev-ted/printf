@@ -1,20 +1,32 @@
 #include "holberton.h"
 #include <stdio.h>
+#include <limits.h>
 
 /**
- * main - Entry point
+ * main - Entry point(TEST FILE TO BE DELETED)
  *
  * Return: Always 0
  */
 int main(void)
 {
-	int print;
-	char *name;
 	
+	char *name;
+	double d =  -290909;
+	unsigned int ui;
 
-	name = "  is fun";
-	print = _printf("%c%s%i%d%b\n", 'c', name, 3, 7,0);
-	printf("%d\n", print);
+	name = " C is fun";
+	ui = (unsigned int)INT_MAX + 1024;
+	/*print = _printf("%c%s%i%d%b\n", 'c', name, 3, 7,0);
+	printf("%d\n", print);*/
+	_printf("char: %c\n", 'C');
+	_printf("string: %s\n", name);
+	_printf("Integer: %i\n", 3);
+	_printf("Integer: %d\n", d);
+	
+	_printf("Binary number: %b\n", 1);
+	printf("%u\n", ui);
+	_printf("Unassigned num: %u\n", ui);
+
 	return (0);
 }
 

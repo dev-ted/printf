@@ -14,6 +14,8 @@ int _printf(const char *format, ...)
 		{"%", print_percentage},
 		{"d", print_integer},
 		{"i", print_integer},
+		{"b", print_binary},
+		{"u", print_unsigned_integer},
 
 
 	};
