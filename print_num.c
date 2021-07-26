@@ -52,8 +52,9 @@ int print_address(va_list list, param_func *func)
 {
 	char *s;
 	unsigned long int address = va_arg(list, unsigned long int);
-	
+
 	register int counter = 0;
+
 	(void)func;
 
 	if (!address)
