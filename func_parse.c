@@ -2,7 +2,7 @@
 
 /**
  * func_parse - function that checks specifier and
- * and get the correct print function 
+ * and get the correct print function
  * @c: character with specifier
  * Description: the function loops through the structs array
  * f_list[] to find a match between the specifier passed to _printf
@@ -31,16 +31,15 @@ int (*func_parse(char c))(va_list, param_func *)
 	register int i;
 
 	for (i = 0; i < args_flags; i++)
-	    if (f_list[i].type == c)
-		 return (f_list[i].func);
+		if (f_list[i].type == c)
+		return (f_list[i].func);
 	return (NULL);
 }
 
 /**
  * get_flags - finds the flag func
  * @s: the format string
- * @params: the parameters struct
- *
+ *@func: pointer to flag function
  * Return: if flag was valid
  */
 int get_flags(char s, param_func *func)
@@ -58,8 +57,8 @@ int get_flags(char s, param_func *func)
 	case '#':
 		i = func->hash_flag = 1;
 		break;
-	
-	
+
+
 	}
 	return (i);
 }

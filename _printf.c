@@ -10,9 +10,9 @@ int _printf(const char *format, ...)
 	int (*print_function)(va_list, param_func *);
 	va_list list;
 	const char *pointer;
-	param_func flags = init_flags;
+	param_func flags = {0, 0, 0};
 
-	int count = 0;
+	register int count = 0;
 
 	va_start(list, format);
 	if (!format || (format[0] != '%' && format[1]))

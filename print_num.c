@@ -56,10 +56,10 @@ int print_address(va_list list, param_func *func)
 
 	(void)func;
 	if (!address)
-	return(_puts("nil"));
+	return (_puts("nil"));
 
 	s = convert_num(address, 16, 1);
 	counter += _puts("0x");
 	counter += _puts(s);
-	return(counter);
+	return (counter);
 }

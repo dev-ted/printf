@@ -8,10 +8,10 @@
 void print_num(int n)
 {
 	unsigned int n1;
-	
+
 	if (n < 0)
 	{
-	       	_putchar('-');
+		_putchar('-');
 		n1 = -n;
 	}
 	else
@@ -35,15 +35,16 @@ char *convert_num(unsigned long int num, int base, int lowercase)
 	char *str_lowercase;
 	char *str_uppercase;
 	char *ptr;
+
 	str_lowercase = "0123456789abcdef";
+
 	str_uppercase = "0123456789ABCDEF";
-	
-	array = (lowercase ) ? str_lowercase
+
+	array = (lowercase) ? str_lowercase
 		: str_uppercase;
 	ptr = &buffer[49];
 	*ptr = '\0';
-	do
-	{
+	do {
 		*--ptr = array[num % base];
 		num /= base;
 	} while (num != 0);

@@ -5,20 +5,19 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-#define init_flags {0, 0, 0}
 
 /**
  * struct param_flags - struct containing flags to get
  * when a flag specifier is passed to _printf()
- * @plus: flag for the '+' character
- * @space: flag for the ' ' character
- * @hash: flag for the '#' character
+ * @plus_flag: flag for the '+' character
+ * @space_flag: flag for the ' ' character
+ * @hash_flag: flag for the '#' character
  */
 typedef struct param_flags
 {
-    int plus_flag;
-    int space_flag;
-    int hash_flag;
+	int plus_flag;
+	int space_flag;
+	int hash_flag;
 } param_func;
 
 /**
@@ -29,9 +28,9 @@ typedef struct param_flags
 
 typedef struct func_convert
 {
-    char type;
-    int (*func)(va_list list, param_func *func);
-}f_convert;
+	char type;
+	int (*func)(va_list list, param_func *func);
+} f_convert;
 
 
 /*function prototypes*/
