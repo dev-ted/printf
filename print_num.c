@@ -51,13 +51,13 @@ int print_unsigned_integer(va_list list, param_func *func)
 int print_address(va_list list, param_func *func)
 {
 	char *s;
-	int counter = 0;
 	unsigned long int address = va_arg(list, unsigned long int);
-
+	
+	register int counter = 0;
 	(void)func;
-	if (!address)
-	return (_puts("nil"));
 
+	if (!address)
+		return (_puts("(nil)"));
 	s = convert_num(address, 16, 1);
 	counter += _puts("0x");
 	counter += _puts(s);

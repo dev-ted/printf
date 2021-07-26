@@ -30,8 +30,8 @@ void print_num(int n)
  */
 char *convert_num(unsigned long int num, int base, int lowercase)
 {
-	char *array;
-	char buffer[50];
+	static char *array;
+	static char buffer[50];
 	char *str_lowercase;
 	char *str_uppercase;
 	char *ptr;
@@ -40,7 +40,8 @@ char *convert_num(unsigned long int num, int base, int lowercase)
 
 	str_uppercase = "0123456789ABCDEF";
 
-	array = (lowercase) ? str_lowercase
+	array = (lowercase)
+		? str_lowercase
 		: str_uppercase;
 	ptr = &buffer[49];
 	*ptr = '\0';

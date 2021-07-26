@@ -26,7 +26,7 @@ int (*func_parse(char c))(va_list, param_func *)
 		{'%', print_percentage},
 		{'p', print_address}
 		};
-	int args_flags = 11;
+	int args_flags =sizeof(f_list);
 
 	register int i;
 
