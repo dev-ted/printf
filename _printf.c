@@ -7,28 +7,39 @@
  */
 int _printf(const char *format, ...)
 {
-	int characters;
-	f_convert f_list[] = {
-		{"c", print_chars},
-		{"s", print_strings},
-		{"%", print_percentage},
-		{"d", print_integer},
-		{"i", print_integer},
-		{"b", print_binary},
-		{"u", print_unsigned_integer},
-		{"x", print_hexa},
-		{"o", print_octal},
-		{"X", print_heX},
+	int (*print_function)(va_list, param_func *);
+	va_list list;
+	const char *pointer;
+	param_func flags = init_flags;
 
-	};
-	va_list args;
+	int count = 0;
 
-	if (format == NULL)
+	va_start(list, format);
+	if (!format || (format[0] != '%' && format[1]))
 		return (-1);
-
-	va_start(args, format);
-
-	characters = func_parse(format, f_list, args);
-	va_end(args);
-	return (characters);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (pointer = format; *pointer; pointer++)
+	{
+		if (*pointer != '%')
+		{
+			pointer++;
+			if (*pointer == '%')
+			{
+				count += _putchar('%');
+				continue;
+			}
+			while (get_flags(*pointer, &flags))
+				pointer++;
+			print_function = func_parse(*pointer);
+			count += (print_function)
+						 ? print_function(list, &flags)
+						 : _printf("%%%c", *pointer);
+		}
+		else
+			count += _putchar(*pointer);
+	}
+	_putchar(-1);
+	va_end(list);
+	return (count);
 }

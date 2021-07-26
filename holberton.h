@@ -5,42 +5,60 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
+#define init_flags {0, 0, 0}
+
+/**
+ * struct param_flags - struct containing flags to get
+ * when a flag specifier is passed to _printf()
+ * @plus: flag for the '+' character
+ * @space: flag for the ' ' character
+ * @hash: flag for the '#' character
+ */
+typedef struct param_flags
+{
+    int plus_flag;
+    int space_flag;
+    int hash_flag;
+} param_func;
+
 /**
 * struct func_convert - gets structure for the symbols and functions
 *@type: operator symbols
 *@func: the associated function
 */
 
-struct func_convert
+typedef struct func_convert
 {
-    char *type;
-    int (*func)(va_list);
-};
-typedef struct func_convert f_convert;
+    char type;
+    int (*func)(va_list list, param_func *func);
+}f_convert;
+
 
 /*function prototypes*/
 int _printf(const char *format, ...);
-int func_parse(const char *format, f_convert func_list[], va_list args);
+int (*func_parse(char c))(va_list, param_func *);
+int print_chars(va_list list, param_func *func);
+int print_strings(va_list list, param_func *func);
+int print_percentage(va_list list, param_func *func);
+int print_integer(va_list list, param_func *func);
+int print_binary(va_list list, param_func *func);
+int print_unsigned_integer(va_list list, param_func *func);
+int print_heX(va_list list, param_func *func);
+int print_hexa(va_list list, param_func *func);
+int print_octal(va_list list, param_func *func);
+int print_stringUpper(va_list list, param_func *func);
+
+/*putchar function*/
 int _putchar(char c);
-int print_chars(va_list);
-int print_strings(va_list);
-int print_percentage(va_list);
-int print_integer(va_list);
-int print_binary(va_list list);
-int print_unsigned_integer(va_list list);
-int print_heX(va_list list);
-int hexa_length(unsigned int n);
-char hexa(int n);
-int print_hexa(va_list list);
-int print_octal(va_list list);
+int _puts(char *str);
 
 /* Utils */
-int hex_check(int num, char x);
-int print_num(va_list);
+int get_flags(char s, param_func *func);
+int get_digits(int i);
+void print_num(int i);
 unsigned int get_base_len(unsigned int num, unsigned int base);
 void get_write_base(char *str);
 char *reverse_string(char *s);
 char *_memcpy(char *dest, char *src, unsigned int n);
-int unsigned_number(unsigned int n);
-char *convert_func(unsigned long int num, int base, int lowercase);
+char *convert_num(unsigned long int num, int base, int lowercase);
 #endif

@@ -3,10 +3,12 @@
 /**
  *print_chars - prints a char
  *@list: list of arguments
+ *@func: pointer to the struct flags in which we turn the flags on
  *Return: number of characters printed.
  */
-int print_chars(va_list list)
+int print_chars(va_list list, param_func *func)
 {
+	(void)func;
 	_putchar(va_arg(list, int));
 	return (1);
 }
@@ -14,17 +16,16 @@ int print_chars(va_list list)
 /**
  *print_strings - prints strings
  *@list: list of arguments
+ *@func: pointer to the struct flags in which we turn the flags on/off
  *Return: number of characters printed
  */
-int print_strings(va_list list)
+int print_strings(va_list list, param_func *func)
 {
-	int i;
 	char *str;
 
 	str = va_arg(list, char *);
-	if (str == NULL)
+	(void)func;
+	if (!str)
 		str = "(null)";
-	for (i = 0; str[i] != '\0'; i++)
-		_putchar(str[i]);
-	return (i);
+	return (_puts(str));
 }

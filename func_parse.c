@@ -1,53 +1,64 @@
 #include "holberton.h"
 
 /**
- * func_parse - function that gets main string and parameters
- * and returns a formated string
- * @format: string with specified characters
- * @func_list: list of functions
- * @args: list of arguments
- * Return: number of characters printed
+ * func_parse - function that checks specifier and
+ * and get the correct print function 
+ * @c: character with specifier
+ * Description: the function loops through the structs array
+ * f_list[] to find a match between the specifier passed to _printf
+ * and the first element of the struct, and then the approriate
+ * printing function
+ * Return: the correct function
  */
-int func_parse(const char *format, f_convert func_list[], va_list args)
+int (*func_parse(char c))(va_list, param_func *)
 {
-	int i, j, f_value, characters;
+	f_convert f_list[] = {
+		{'i', print_integer},
+		{'s', print_strings},
+		{'c', print_chars},
+		{'d', print_integer},
+		{'u', print_unsigned_integer},
+		{'x', print_hexa},
+		{'X', print_heX},
+		{'b', print_binary},
+		{'o', print_octal},
+		{'S', print_stringUpper},
+		{'%', print_percentage},
+		};
+	int args_flags = 10;
 
-	characters = 0;
-	/* check each character in the main string */
-	for (i = 0; format[i] != '\0'; i++)
+	register int i;
+
+	for (i = 0; i < args_flags; i++)
+	    if (f_list[i].type == c)
+		 return (f_list[i].func);
+	return (NULL);
+}
+
+/**
+ * get_flags - finds the flag func
+ * @s: the format string
+ * @params: the parameters struct
+ *
+ * Return: if flag was valid
+ */
+int get_flags(char s, param_func *func)
+{
+	int i = 0;
+
+	switch (s)
 	{
-		if (format[i] == '%')/* checks coversion specifies*/
-		{
-			/* go through the list of functions to find the right function */
-			for (j = 0; func_list[j].type != NULL; j++)
-			{
-				if (format[i + 1] == func_list[j].type[0])
-				{
-					f_value = func_list[j].func(args);
-					if (f_value == -1)
-						return (-1);
-					characters += f_value;
-					break;
-				}
-			}
-			if (func_list[j].type == NULL && format[i + 1] != ' ')
-			{
-				if (format[i + 1] != '\0') /* if not the end of the string */
-				{
-					_putchar(format[i]);	 /* print the character */
-					_putchar(format[i + 1]); /* print and incriment i */
-					characters = characters + 2;
-				}
-				else
-					return (-1);
-			}
-			i += 1; /* skip format characters */
-		}
-		else
-		{
-			_putchar(format[i]);/* call _putchar and print the characters */
-			characters++;
-		}
+	case '+':
+		i = func->plus_flag = 1;
+		break;
+	case ' ':
+		i = func->space_flag = 1;
+		break;
+	case '#':
+		i = func->hash_flag = 1;
+		break;
+	
+	
 	}
-	return (characters);
+	return (i);
 }

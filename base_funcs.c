@@ -3,182 +3,76 @@
 /**
  * print_binary - Converts a number from base 10 to binary
  * @list: List of arguments passed to this function
+ * @func: pointer to the struct flags in which we turn the flags on
  * Return: The length of the number printed
  */
-int print_binary(va_list list)
+int print_binary(va_list list, param_func *func)
 {
-    unsigned int binary_num;
-    int i, length;
-    char *str;
-    char *rev_string;
+	unsigned int binary_num;
+	char *str;
 
-    binary_num = va_arg(list, unsigned int);
-    if (binary_num == 0)
-        return (_putchar('0'));
-    if (binary_num < 1)
-        return (-1);
-    length = get_base_len(binary_num, 2);
-    str = malloc(sizeof(char) * length + 1);
-    if (str == NULL)
-        return (-1);
-    for (i = 0; binary_num > 0; i++)
-    {
-        if (binary_num % 2 == 0)
-            str[i] = '0';
-        else
-            str[i] = '1';
-        binary_num /= 2;
-    }
-    str[i] = '\0';
-    rev_string = reverse_string(str);
-    if (rev_string == NULL)
-        return (-1);
-    get_write_base(rev_string);
-    free(str);
-    free(rev_string);
-    return (length);
+	binary_num = va_arg(list, unsigned int);
+	str = convert_num(binary_num, 2, 0);
+	(void)func;
+	return (_puts(str));
 }
 
 /**
  * print_hexa - print an hexadecimal number
- * @args: the number passed
+ * @list: the number passed
+ * @func: pointer to the struct flags in which we turn the flags on
  * Return: the length of number printed
  */
 
-int print_hexa(va_list list)
+int print_hexa(va_list list, param_func *func)
 {
-    unsigned int num;
-    int len;
-    int rem_num;
-    char *hex_rep;
-    char *rev_hex;
+	unsigned int hex_num = va_arg(list, unsigned int);
+	char *hex_string = convert_num(hex_num, 16, 10);
+	int i = 0;
 
-    num = va_arg(list, unsigned int);
-
-    if (num == 0)
-        return (_putchar('0'));
-    if (num < 1)
-        return (-1);
-    len = get_base_len(num, 16);
-    hex_rep = malloc(sizeof(char) * len + 1);
-    if (hex_rep == NULL)
-        return (-1);
-    for (len = 0; num > 0; len++)
-    {
-        rem_num = num % 16;
-        if (rem_num > 9)
-        {
-            rem_num = hex_check(rem_num, 'x');
-            hex_rep[len] = rem_num;
-        }
-        else
-            hex_rep[len] = rem_num + 48;
-        num = num / 16;
-    }
-    hex_rep[len] = '\0';
-    rev_hex = reverse_string(hex_rep);
-    if (rev_hex == NULL)
-        return (-1);
-    get_write_base(rev_hex);
-    free(hex_rep);
-    free(rev_hex);
-    return (len);
+	if (func->hash_flag == 1 && hex_string[0] != '0')
+		i += _puts("0x");
+	i += _puts(hex_string);
+	return (i);
 }
-
 
 /**
  * print_octal - print a number converted in octal
- * @args: the argument received
+ * @list: the argument received
+ * @func: pointer to the struct flags in which we turn the flags on
  * Return: the length of printed in console
  */
-
-int print_octal(va_list list)
+int print_octal(va_list list, param_func *func)
 {
-    unsigned int num;
-    int len;
-    int rem_num;
-    char *hex_rep;
-    char *rev_hex;
+	unsigned int num;
+	int len;
+	char *oct_rep;
 
-    num = va_arg(list, unsigned int);
+	num = va_arg(list, unsigned int);
+	oct_rep = convert_num(num, 8, 10);
+	len = 0;
 
-    if (num == 0)
-        return (_putchar('0'));
-    if (num < 1)
-        return (-1);
-    len = get_base_len(num, 16);
-    hex_rep = malloc(sizeof(char) * len + 1);
-    if (hex_rep == NULL)
-        return (-1);
-    for (len = 0; num > 0; len++)
-    {
-        rem_num = num % 16;
-        if (rem_num > 9)
-        {
-            rem_num = hex_check(rem_num, 'X');
-            hex_rep[len] = rem_num;
-        }
-        else
-            hex_rep[len] = rem_num + 48;
-        num = num / 16;
-    }
-    hex_rep[len] = '\0';
-    rev_hex = reverse_string(hex_rep);
-    if (rev_hex == NULL)
-        return (-1);
-    get_write_base(rev_hex);
-    free(hex_rep);
-    free(rev_hex);
-    return (len);
+	if (func->hash_flag == 1 && oct_rep[0] != '0')
+		len += _putchar('0');
+	len += _puts(oct_rep);
+	return (len);
 }
 
-
-int print_heX(va_list list)
+/**
+ * print_heX - prints a number in hexadecimal base,
+ * in uppercase
+ * @list: va_list arguments from _printf
+ * @func: pointer to the struct flags in which we turn the flags on
+ * Return: the length of printed in console
+ */
+int print_heX(va_list list, param_func *func)
 {
-    /*unsigned int hex_num = va_arg(list, unsigned int);
-    char *heX_string = convert_func(hex_num, 16, 10);
-    int count = 0;
-    if (heX_string[0] != '0')
-        count += _putchar("0X");
-    count += _putchar(heX_string[0]);
-    return count;*/
+	unsigned int hex_num = va_arg(list, unsigned int);
+	char *heX_string = convert_num(hex_num, 16, 10);
+	int i = 0;
 
-    unsigned int num;
-    int len;
-    int rem_num;
-    char *hex_rep;
-    char *rev_hex;
-
-    num = va_arg(list, unsigned int);
-
-    if (num == 0)
-        return (_putchar('0'));
-    if (num < 1)
-        return (-1);
-    len = get_base_len(num, 16);
-    hex_rep = malloc(sizeof(char) * len + 1);
-    if (hex_rep == NULL)
-        return (-1);
-    for (len = 0; num > 0; len++)
-    {
-        rem_num = num % 16;
-        if (rem_num > 9)
-        {
-            rem_num = hex_check(rem_num, 'X');
-            hex_rep[len] = rem_num;
-        }
-        else
-            hex_rep[len] = rem_num + 48;
-        num = num / 16;
-    }
-    hex_rep[len] = '\0';
-    rev_hex = reverse_string(hex_rep);
-    if (rev_hex == NULL)
-        return (-1);
-    get_write_base(rev_hex);
-    free(hex_rep);
-    free(rev_hex);
-    return (len);
+	if (func->hash_flag == 1 && heX_string[0] != '0')
+		i += _puts("0X");
+	i += _puts(heX_string);
+	return (i);
 }
-
-
