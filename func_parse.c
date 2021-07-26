@@ -13,19 +13,20 @@
 int (*func_parse(char c))(va_list, param_func *)
 {
 	f_convert f_list[] = {
-		{'i', print_integer},
-		{'s', print_strings},
-		{'c', print_chars},
-		{'d', print_integer},
-		{'u', print_unsigned_integer},
-		{'x', print_hexa},
-		{'X', print_heX},
-		{'b', print_binary},
-		{'o', print_octal},
-		{'S', print_stringUpper},
-		{'%', print_percentage},
-		{'p', print_address}
-		};
+	    {'i', print_integer},
+	    {'s', print_strings},
+	    {'c', print_chars},
+	    {'d', print_integer},
+	    {'u', print_unsigned_integer},
+	    {'x', print_hexa},
+	    {'X', print_heX},
+	    {'b', print_binary},
+	    {'o', print_octal},
+	    {'S', print_stringUpper},
+	    {'%', print_percentage},
+	    {'p', print_address},
+	    {'R', print_rot13}
+	};
 	int args_flags = sizeof(f_list);
 
 	register int i;
