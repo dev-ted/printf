@@ -12,6 +12,8 @@ int main(void)
 	int len;
 	int len2;
 	unsigned int ui;
+	void *address;
+	address = (void *)0x7ffe637541f0;
 	
 
 	len = _printf("Let's try to printf a simple sentence.\n");
@@ -37,6 +39,7 @@ int main(void)
 	len2 = printf("Percent:[%%]\n");
 	_printf("Len:[%d]\n", len);
 	printf("Len:[%d]\n", len2);
+	printf("Address:[%p]\n", address);
 	
 
 	return (0);

@@ -41,3 +41,25 @@ int print_unsigned_integer(va_list list, param_func *func)
 	(void)func;
 	return (_puts(str));
 }
+
+/**
+ * print_address - prints an address of a variable in hexa format
+ * @list: list of arguments supllied
+ * @func: pointer to flag functions
+ * Return: the number/address of a variable
+*/
+int print_address(va_list list, param_func *func)
+{
+	char *s;
+	int counter = 0;
+	unsigned long int address = va_arg(list, unsigned long int);
+
+	(void)func;
+	if (!address)
+	return(_puts("nil"));
+
+	s = convert_num(address, 16, 1);
+	counter += _puts("0x");
+	counter += _puts(s);
+	return(counter);
+}

@@ -24,8 +24,9 @@ int (*func_parse(char c))(va_list, param_func *)
 		{'o', print_octal},
 		{'S', print_stringUpper},
 		{'%', print_percentage},
+		{'p', print_address}
 		};
-	int args_flags = 10;
+	int args_flags = 11;
 
 	register int i;
 
