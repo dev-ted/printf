@@ -53,7 +53,8 @@ int print_stringUpper(va_list list, param_func *func)
 
 /**
   * print_rot13 - encodes a string into rot13.
-  * @list: arguments supllied to the function 
+  * @list: arguments supllied to the function
+  * @func: pointer to the flag function
   * Return: size the output text
   */
 int print_rot13(va_list list, param_func *func)
@@ -65,7 +66,7 @@ int print_rot13(va_list list, param_func *func)
 
 	r = va_arg(list, char *);
 	(void)func;
-	
+
 	if (r == NULL)
 		r = "(null)";
 	for (j = 0; r[j] != '\0'; j++)
