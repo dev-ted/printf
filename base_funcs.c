@@ -10,15 +10,15 @@ int print_binary(va_list list, param_func *func)
 {
 	unsigned int binary_num;
 	char *str;
-	int len;
+	int len = 0;
 
 	binary_num = va_arg(list, unsigned int);
 	str = convert_num(binary_num, 2, FLAG_UNSIGNED, func);
 	if (func->hash_flag && binary_num)
 		*--str = '0';
 	func->unsign = 1;
-	len += print_num(str, func);
-	return (len);
+
+	return (len += print_num(str, func));
 }
 
 /**
@@ -47,8 +47,7 @@ int print_hexa(va_list list, param_func *func)
 		*--hex_string = '0';
 	}
 	func->unsign = 1;
-	i += print_num(hex_string, func);
-	return (i);
+	return (i += print_num(hex_string, func));
 }
 
 /**
@@ -63,20 +62,18 @@ int print_octal(va_list list, param_func *func)
 	int len = 0;
 	char *oct_rep;
 
-	
 	if (func->l_mod)
 		num = (unsigned long)va_arg(list, unsigned long);
 	else if (func->h_mod)
 		num = (unsigned short int)va_arg(list, unsigned int);
 	else
 		num = (unsigned int)va_arg(list, unsigned int);
-	
 	oct_rep = convert_num(num, 8, FLAG_UNSIGNED, func);
 	if (func->hash_flag && num)
 		*--oct_rep = '0';
 	func->unsign = 1;
-	len += print_num(oct_rep, func);
-	return (len);
+
+	return (len += print_num(oct_rep, func));
 }
 
 /**
@@ -105,6 +102,6 @@ int print_heX(va_list list, param_func *func)
 		*--hex_string = '0';
 	}
 	func->unsign = 1;
-	i += print_num(hex_string, func);
-	return (i);
+
+	return (i += print_num(hex_string, func));
 }

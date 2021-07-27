@@ -8,8 +8,6 @@
  */
 int print_chars(va_list list, param_func *func)
 {
-	(void)func;
-	
 	unsigned int i = 1;
 	unsigned int count = 0;
 	unsigned int str = va_arg(list, int);
@@ -20,7 +18,6 @@ int print_chars(va_list list, param_func *func)
 		count += _putchar(' ');
 	if (!func->minus_flag)
 		count += _putchar(str);
-	
 	return (count);
 }
 

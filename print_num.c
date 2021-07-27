@@ -32,15 +32,15 @@ int print_integer(va_list list, param_func *func)
 int print_unsigned_integer(va_list list, param_func *func)
 {
 	unsigned long unsigned_num;
-	
-	if(func->l_mod)
-		unsigned_num = (unsigned long) va_arg(list, unsigned long);
+
+	if (func->l_mod)
+		unsigned_num = (unsigned long)va_arg(list, unsigned long);
 	else if (func->h_mod)
-		unsigned_num = (unsigned short int) va_arg(list, unsigned int);
+		unsigned_num = (unsigned short int)va_arg(list, unsigned int);
 	else
-		unsigned_num = (unsigned int) va_arg(list, unsigned int);
+		unsigned_num = (unsigned int)va_arg(list, unsigned int);
 	func->unsign = 1;
-	return (print_num(convert(unsigned_num, 10, FLAG_UNSIGNED, func), func));
+	return (print_num(convert_num(unsigned_num, 10, FLAG_UNSIGNED, func), func));
 }
 
 /**

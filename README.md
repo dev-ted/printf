@@ -8,9 +8,21 @@ _printf() functiion formats and prints data to the standard output according to 
 The function has the following conversion specifies:
 
 + %c - prints a character
-+ %d - prints a decimal integer
++ %d - prints a  integer
 + %s - prints a string
 + %i - prints an integer
++ % - prints percentage;
++ %b - print binary numbers
++ %u - print unsigned integers of type int
++ %x - print hexadecimal numbers in lowercase
++ %X - print hexadecimal numbers in uppercase
++ %o - print octal numbers
++ %r - prints string in reverse order 
++ %R - prints string in ROT13 encoding
++ %p - print pointer addresses
++ ' ' - print a space
++ # -  modifier for unsigned conversions
++ +: prints a plus sign in front of the number
 
 
 # Installation
@@ -52,9 +64,6 @@ int main(void)
 
 
 ```
-
-# License
-[GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 # Copyright
 Copyright (c) 2021 Teddy Kisala & Mark Tanui

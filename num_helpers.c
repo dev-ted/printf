@@ -2,7 +2,8 @@
 
 /**
  * print_num - prints a number send to this function
- * @n: number to be printed
+ * @str: number to be printed
+ * @func: name of the function that called this function
  * Return: The number of arguments printed
  */
 int print_num(char *str, param_func *func)
@@ -33,10 +34,11 @@ int print_num(char *str, param_func *func)
  * convert_num - converts number and base into string
  * @num: input number
  * @base: input base
- * @lowercase: flag if hexa values need to be lowercase
+ * @flags: flag if hexa values need to be lowercase
+ * @func: name of the function that called this function
  * Return: result string
  */
-char *convert_num(unsigned long int num, int base, int flags, param_func *func)
+char *convert_num(long int num, int base, int flags, param_func *func)
 {
 	static char *array;
 	static char buffer[50];
@@ -45,7 +47,6 @@ char *convert_num(unsigned long int num, int base, int flags, param_func *func)
 	char *ptr;
 	char sign = 0;
 	unsigned long n = num;
-	
 	(void)func;
 
 
@@ -63,45 +64,20 @@ char *convert_num(unsigned long int num, int base, int flags, param_func *func)
 	ptr = &buffer[49];
 	*ptr = '\0';
 	do {
-		*--ptr = array[num % base];
-		num /= base;
-	} while (num != 0);
+		*--ptr = array[n % base];
+		n /= base;
+	} while (n != 0);
 	if (sign)
 		*--ptr = sign;
 	return (ptr);
 }
 
 /**
- * get_digits - returns the number of digits in an integer
- * for _printf
- * @i: integer to evaluate
- * Return: number of digits
-
-int get_digits(int i)
-{
-	unsigned int d = 0;
-	unsigned int u;
-
-	if (i < 0)
-		u = i * -1;
-	else
-		u = i;
-	while (u != 0)
-	{
-		u /= 10;
-		d++;
-	}
-	return (d);
-}
- */
-
-/**
- * isdigit - checks if character is digit
+ * is_digit - checks if character is digit
  * @c: the character to check
- *
  * Return: 1 if digit, 0 otherwise
  */
-int isdigit(int c)
+int is_digit(int c)
 {
 	return (c >= '0' && c <= '9');
 }

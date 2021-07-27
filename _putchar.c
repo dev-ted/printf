@@ -7,7 +7,7 @@
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
-int _putchar(char c)
+int _putchar(int c)
 {
 	static char buf[1024];
 	static int pos;
@@ -19,8 +19,7 @@ int _putchar(char c)
 	}
 	if (c != -1)
 	{
-		buf[pos] = c;
-		pos++;
+		buf[pos++] = c;
 	}
 	return (1);
 }
@@ -33,10 +32,10 @@ int _putchar(char c)
  */
 int _puts(char *str)
 {
-	register int count;
+	char *count = str;
 
-	for (count = 0; str[count] != '\0'; count++)
-		_putchar(str[count]);
-	return (count);
+	while (*str)
+		_putchar(*str++);
+	return (str - count);
 }
 

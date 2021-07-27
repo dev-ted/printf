@@ -10,33 +10,36 @@
  * printing function
  * Return: the correct function
  */
-int (*func_parse(char c))(va_list, param_func *)
+int (*func_parse(char *c))(va_list list, param_func * func)
 {
 	f_convert f_list[] = {
-	    {'i', print_integer},
-	    {'s', print_strings},
-	    {'c', print_chars},
-	    {'d', print_integer},
-	    {'u', print_unsigned_integer},
-	    {'x', print_hexa},
-	    {'X', print_heX},
-	    {'b', print_binary},
-	    {'o', print_octal},
-	    {'S', print_stringUpper},
-	    {'%', print_percentage},
-	    {'p', print_address},
-	    {'R', print_rot13},
-	    {'r', print_reverse},
+	    {"s", print_strings},
+	    {"c", print_chars},
+	    {"d", print_integer},
+	    {"i", print_integer},
+	    {"u", print_unsigned_integer},
+	    {"x", print_hexa},
+	    {"X", print_heX},
+	    {"b", print_binary},
+	    {"o", print_octal},
+	    {"S", print_stringUpper},
+	    {"%", print_percentage},
+	    {"p", print_address},
+	    {"r", print_reverse},
+	    {"R", print_rot13},
 	    {NULL, NULL}
 
 	};
-	int args_flags = sizeof(f_list);
+	int i = 0;
 
-	register int i;
-
-	for (i = 0; i < args_flags; i++)
-		if (f_list[i].type == c)
-		return (f_list[i].func);
+	while (f_list[i].type)
+	{
+		if (*c == f_list[i].type[0])
+		{
+			return (f_list[i].func);
+		}
+		i++;
+	}
 	return (NULL);
 }
 
@@ -67,13 +70,12 @@ int get_flags(char *s, param_func *func)
 	case '-':
 		i = func->minus_flag = 1;
 		break;
-	
 	}
 	return (i);
 }
 
 /**
- * get_print_func - finds the format func
+ * print_func - finds the format func
  * @s: the format string
  * @list: argument pointer
  * @func: the parameters struct
@@ -83,6 +85,7 @@ int get_flags(char *s, param_func *func)
 int print_func(char *s, va_list list, param_func *func)
 {
 	int (*f)(va_list, param_func *) = func_parse(s);
+
 	if (f)
 		return (f(list, func));
 	return (0);
