@@ -26,7 +26,7 @@ int (*func_parse(char c))(va_list, param_func *)
 	    {'%', print_percentage},
 	    {'p', print_address},
 	    {'R', print_rot13},
-	    {"r", print_reverse}
+	    {'r', print_reverse}
 	};
 	int args_flags = sizeof(f_list);
 
