@@ -68,7 +68,7 @@ int print_rot13(va_list list, param_func *func)
 	(void)func;
 
 	if (r == NULL)
-		r = "(null)";
+		r = ("null");
 	for (j = 0; r[j] != '\0'; j++)
 	{
 		for (i = 0; input[i] != '\0'; i++)
