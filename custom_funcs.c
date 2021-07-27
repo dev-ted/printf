@@ -95,6 +95,8 @@ int print_reverse(va_list list, param_func *func)
 	int i, j = 0;
 
 	st = va_arg(list, char *);
+	(void)func;
+
 	if (st == NULL)
 		st = ("null");
 	for (i = 0; st[i] != '\0'; i++)
