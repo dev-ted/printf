@@ -82,3 +82,28 @@ int print_rot13(va_list list, param_func *func)
 	}
 	return (count);
 }
+
+/**
+*print_rev - prints a string in reverse
+*@list: string to print
+*@func: pointer to the flag function
+*Return: number of chars printed
+*/
+int print_reverse(va_list list, param_func *func)
+{
+	char *st;
+	int i, j = 0;
+
+	st = va_arg(list, char *);
+	if (st == NULL)
+		st = ("null");
+	for (i = 0; st[i] != '\0'; i++)
+		;
+	for (i -= 1 ; i >= 0; i--)
+	{
+		_putchar(st[i]);
+		j++;
+	}
+	return (j);
+}
+
