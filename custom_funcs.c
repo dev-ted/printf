@@ -51,34 +51,34 @@ int print_stringUpper(va_list list, param_func *func)
 	return (count);
 }
 
-
 /**
-* print_rot13 - prints a string in rot13
-*@list: arguments from _printf
-*@func: pointer to the struct flags in which we turn the flags on
-*Return: number of char printed
-*/
+  * print_rot13 - encodes a string into rot13.
+  * @list: arguments supllied to the function 
+  * Return: size the output text
+  */
 int print_rot13(va_list list, param_func *func)
 {
-	int i, index;
-	int count = 0;
+	int j, i, count = 0;
+	char *r;
+	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
+	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLM nopqrstuvwxyzabcdefghijklm";
 
-	char array[] = "NOPQRSTUVWXYZABCDEFGHIJKLM      nopqrstuvwxyzabcdefghijklm";
-	char *str = va_arg(list, char *);
+	r = va_arg(list, char *);
 	(void)func;
-
-	i = 0;
-	index = 0;
-	while (str[i])
+	
+	if (r == NULL)
+		r = "(null)";
+	for (j = 0; r[j] != '\0'; j++)
 	{
-		if ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= 'a' && str[i] <= 'z'))
+		for (i = 0; input[i] != '\0'; i++)
 		{
-			index = str[i] - 65;
-			count += _putchar(array[index]);
+			if (r[j] == input[i])
+			{
+				_putchar(output[i]);
+				count++;
+				break;
+			}
 		}
-		else
-			 count += _putchar(array[i]);
-		 i++;
 	}
 	return (count);
 }
