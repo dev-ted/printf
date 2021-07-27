@@ -8,20 +8,18 @@
  */
 int print_integer(va_list list, param_func *func)
 {
-	int i;
+	long i;
 	int num_of_digits;
 
-	i =  va_arg(list, int);
-	num_of_digits = get_digits(i);
-	/* check for flags */
-	if (func->space_flag == 1 && func->plus_flag == 0 && i >= 0)
-		num_of_digits += _putchar(' ');
-	if (func->plus_flag == 1 && i >= 0)
-		num_of_digits += _putchar('+');
-	if (i <= 0)
-		num_of_digits++;/* increment*/
+	/* check for mods */
+	if (func->l_mod)
+		i = va_arg(list, long);
+	else if (func->h_mod)
+		i = (short int) va_arg(list, int);
+	else
+		i = (int) va_arg(list, int);
 	/* print the number */
-	print_num(i);
+	num_of_digits = print_num(convert_num(i, 10, 0, func), func);
 	return (num_of_digits);
 }
 
@@ -33,13 +31,16 @@ int print_integer(va_list list, param_func *func)
 */
 int print_unsigned_integer(va_list list, param_func *func)
 {
-	unsigned int unsigned_num;
-	char *str;
-
-	unsigned_num = va_arg(list, unsigned int);
-	str = convert_num(unsigned_num, 10, 0);
-	(void)func;
-	return (_puts(str));
+	unsigned long unsigned_num;
+	
+	if(func->l_mod)
+		unsigned_num = (unsigned long) va_arg(list, unsigned long);
+	else if (func->h_mod)
+		unsigned_num = (unsigned short int) va_arg(list, unsigned int);
+	else
+		unsigned_num = (unsigned int) va_arg(list, unsigned int);
+	func->unsign = 1;
+	return (print_num(convert(unsigned_num, 10, FLAG_UNSIGNED, func), func));
 }
 
 /**
@@ -53,14 +54,10 @@ int print_address(va_list list, param_func *func)
 	char *s;
 	unsigned long int address = va_arg(list, unsigned long int);
 
-	register int counter = 0;
-
-	(void)func;
-
 	if (!address)
 		return (_puts("(nil)"));
-	s = convert_num(address, 16, 1);
-	counter += _puts("0x");
-	counter += _puts(s);
-	return (counter);
+	s = convert_num(address, 16, FLAG_LOWERCASE | FLAG_UNSIGNED, func);
+	*--s = 'x';
+	*--s = '0';
+	return (print_num(s, func));
 }

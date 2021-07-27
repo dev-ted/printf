@@ -9,8 +9,19 @@
 int print_chars(va_list list, param_func *func)
 {
 	(void)func;
-	_putchar(va_arg(list, int));
-	return (1);
+	
+	unsigned int i = 1;
+	unsigned int count = 0;
+	unsigned int str = va_arg(list, int);
+
+	if (func->minus_flag)
+		count += _putchar(str);
+	while (i++ < func->width)
+		count += _putchar(' ');
+	if (!func->minus_flag)
+		count += _putchar(str);
+	
+	return (count);
 }
 
 /**
@@ -22,10 +33,39 @@ int print_chars(va_list list, param_func *func)
 int print_strings(va_list list, param_func *func)
 {
 	char *str;
+	unsigned int i, count, str_len, j;
 
+	i = 0;
+	count = 0;
 	str = va_arg(list, char *);
+	str_len = _strlen(str);
+	j = str_len;
 	(void)func;
-	if (!str)
-		str = "(null)";
-	return (_puts(str));
+
+	switch ((int)(!str))
+		case 1:
+			str = "(null)";
+	if (func->precision < str_len)
+		j = str_len = func->precision;
+	if (func->minus_flag)
+	{
+		if (func->precision != UINT_MAX)
+			for (i = 0; i < str_len; i++)
+				count += _putchar(*str++);
+		else
+			count += _puts(str);
+	}
+	while (j++ < func->width)
+		count += _putchar(' ');
+	if (!func->minus_flag)
+	{
+		if (func->precision != UINT_MAX)
+			for (i = 0; i < str_len; i++)
+				count += _putchar(*str++);
+		else
+			count += _puts(str);
+
+	}
+	return (count);
+
 }

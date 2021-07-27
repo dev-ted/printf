@@ -25,7 +25,8 @@ int (*func_parse(char c))(va_list, param_func *)
 	    {'S', print_stringUpper},
 	    {'%', print_percentage},
 	    {'p', print_address},
-	    {'R', print_rot13}
+	    {'R', print_rot13},
+	    {NULL, NULL}
 	};
 	int args_flags = sizeof(f_list);
 
@@ -38,16 +39,16 @@ int (*func_parse(char c))(va_list, param_func *)
 }
 
 /**
- * get_flags - finds the flag func
- * @s: the format string
+ *get_flags - finds the flag func
+ *@s: the format string
  *@func: pointer to flag function
  * Return: if flag was valid
  */
-int get_flags(char s, param_func *func)
+int get_flags(char *s, param_func *func)
 {
 	int i = 0;
 
-	switch (s)
+	switch (*s)
 	{
 	case '+':
 		i = func->plus_flag = 1;
@@ -58,8 +59,29 @@ int get_flags(char s, param_func *func)
 	case '#':
 		i = func->hash_flag = 1;
 		break;
-
-
+	case '0':
+		i = func->zero_flag = 1;
+		break;
+	case '-':
+		i = func->minus_flag = 1;
+		break;
+	
 	}
 	return (i);
+}
+
+/**
+ * get_print_func - finds the format func
+ * @s: the format string
+ * @list: argument pointer
+ * @func: the parameters struct
+ *
+ * Return: the number of bytes printed
+ */
+int print_func(char *s, va_list list, param_func *func)
+{
+	int (*f)(va_list, param_func *) = func_parse(s);
+	if (f)
+		return (f(list, func));
+	return (0);
 }

@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
+#define FLAG_UNSIGNED  2
+#define FLAG_LOWERCASE 1
+#define UINT_MAX (__INT_MAX__ * 2U + 1U)
 
 /**
  * struct param_flags - struct containing flags to get
@@ -15,9 +18,18 @@
  */
 typedef struct param_flags
 {
-	int plus_flag;
-	int space_flag;
-	int hash_flag;
+	unsigned int plus_flag		: 1;
+	unsigned int space_flag 	: 1;
+	unsigned int hash_flag 		: 1;
+	unsigned int h_mod		: 1;
+	unsigned int l_mod		: 1;
+	unsigned int zero_flag		: 1;
+	unsigned int minus_flag		: 1;
+	unsigned int unsign		: 1;
+
+	unsigned int width;
+	unsigned int precision;
+
 } param_func;
 
 /**
@@ -54,12 +66,15 @@ int _putchar(char c);
 int _puts(char *str);
 
 /* Utils */
-int get_flags(char s, param_func *func);
+int get_flags(char *s, param_func *func);
 int get_digits(int i);
-void print_num(int i);
+int print_num(char *str, param_func *func);
 unsigned int get_base_len(unsigned int num, unsigned int base);
 void get_write_base(char *str);
 char *reverse_string(char *s);
 char *_memcpy(char *dest, char *src, unsigned int n);
-char *convert_num(unsigned long int num, int base, int lowercase);
+char *convert_num(unsigned long int num, int base, int flags, param_func *func);
+char *get_precision(char *str, param_func *func, va_list list);
+void init_params(param_func *func, va_list list);
+char *get_width(char *str, param_func *func, va_list list);
 #endif
