@@ -24,10 +24,6 @@ char *reverse_string(char *s)
 		dest[head] = tmp;
 	}
 	return (dest);
-
-
-
-
 }
 
 /**

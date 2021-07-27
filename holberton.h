@@ -60,6 +60,7 @@ int print_octal(va_list list, param_func *func);
 int print_stringUpper(va_list list, param_func *func);
 int print_address(va_list list, param_func *func);
 int print_rot13(va_list list, param_func *func);
+int print_reverse(va_list list, param_func *func);
 
 /*putchar function*/
 int _putchar(char c);
